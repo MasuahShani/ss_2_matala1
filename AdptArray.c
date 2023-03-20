@@ -68,11 +68,13 @@ Result SetAdptArrayAt(PAdptArray arr_AD, int inx, PElement pe)
     if((arr_AD->size)==0)
     {
         PElement* arr=(PElement*)calloc(1,sizeof(PElement));
-
+        
         if(!arr)
         {
             return FAIL;
         }
+
+        arr_AD->arr=arr;
 
 
     }
@@ -93,7 +95,7 @@ Result SetAdptArrayAt(PAdptArray arr_AD, int inx, PElement pe)
                 new_arr[i]=(*((arr_AD->arr)+i));
             }
         }
-        PElement temp=arr_AD->arr;
+        PElement* temp=arr_AD->arr;
         arr_AD->arr=new_arr;
         free(temp);
         arr_AD->size=inx+1;
