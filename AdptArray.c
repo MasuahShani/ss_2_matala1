@@ -52,10 +52,8 @@ void DeleteAdptArray(PAdptArray arr_AD)
             (arr_AD->df)(*(p_arr+i));
         }
     }
-    if((arr_AD->arr))
-    {
-        free(arr_AD->arr);
-    }
+    free(arr_AD->arr);
+  
 
     free(arr_AD);
     
@@ -63,7 +61,7 @@ void DeleteAdptArray(PAdptArray arr_AD)
 
 Result SetAdptArrayAt(PAdptArray arr_AD, int inx, PElement pe)
 {
-    if(!arr_AD || inx<0)
+    if(!arr_AD || inx<0 || !pe)
     {
         return FAIL;
     }
@@ -75,6 +73,7 @@ Result SetAdptArrayAt(PAdptArray arr_AD, int inx, PElement pe)
         {
             return FAIL;
         }
+
 
     }
 
@@ -119,7 +118,7 @@ Result SetAdptArrayAt(PAdptArray arr_AD, int inx, PElement pe)
 
 PElement GetAdptArrayAt(PAdptArray arr_AD, int inx)
 {
-    if(!arr_AD || (arr_AD->size)<=inx || !(*((arr_AD->arr)+inx)))
+    if(!arr_AD || !(arr_AD->arr) || inx<0 || (arr_AD->size)<=inx || !(*((arr_AD->arr)+inx)))
     {
         return NULL;
     }
